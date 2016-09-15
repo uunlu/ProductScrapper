@@ -5,6 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductScrapper", "ProductScrapper\ProductScrapper.csproj", "{DAA2AE77-E7DC-499B-AEA4-3B4A719774F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductScrapper.AppServices", "ProductScrapper.AppServices\ProductScrapper.AppServices.csproj", "{7A425C36-568A-411F-AD36-3799DB6E7768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductScrapper.Framework", "ProductScrapper.Framework\ProductScrapper.Framework.csproj", "{59B958BF-94A8-4080-B71F-FB1FAFDEA504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductScrapper.Core", "ProductScrapper.Core\ProductScrapper.Core.csproj", "{89A26932-5AF0-4A66-AB63-D5A2DD3B9C17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A3599453-546A-4739-A287-BA847BA9D3D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductScrapper.IntegrationTests", "ProductScrapper.IntegrationTests\ProductScrapper.IntegrationTests.csproj", "{84A57277-89E7-4F34-8255-B86AFD8CC33E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +25,27 @@ Global
 		{DAA2AE77-E7DC-499B-AEA4-3B4A719774F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAA2AE77-E7DC-499B-AEA4-3B4A719774F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAA2AE77-E7DC-499B-AEA4-3B4A719774F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A425C36-568A-411F-AD36-3799DB6E7768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A425C36-568A-411F-AD36-3799DB6E7768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A425C36-568A-411F-AD36-3799DB6E7768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A425C36-568A-411F-AD36-3799DB6E7768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B958BF-94A8-4080-B71F-FB1FAFDEA504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B958BF-94A8-4080-B71F-FB1FAFDEA504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B958BF-94A8-4080-B71F-FB1FAFDEA504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B958BF-94A8-4080-B71F-FB1FAFDEA504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A26932-5AF0-4A66-AB63-D5A2DD3B9C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A26932-5AF0-4A66-AB63-D5A2DD3B9C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A26932-5AF0-4A66-AB63-D5A2DD3B9C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A26932-5AF0-4A66-AB63-D5A2DD3B9C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A57277-89E7-4F34-8255-B86AFD8CC33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A57277-89E7-4F34-8255-B86AFD8CC33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A57277-89E7-4F34-8255-B86AFD8CC33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A57277-89E7-4F34-8255-B86AFD8CC33E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84A57277-89E7-4F34-8255-B86AFD8CC33E} = {A3599453-546A-4739-A287-BA847BA9D3D9}
 	EndGlobalSection
 EndGlobal
