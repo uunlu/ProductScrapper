@@ -30,11 +30,13 @@ namespace ProductScrapper.Framework
             _settings = settings;
 
             ServiceLocator.SetLocatorProvider(new ServiceLocatorProvider(() => new StructureMapServiceLocator(_container)));
-
+           
             _container = new Container(cfg =>
             {
                 cfg.AddRegistry(new FrameworkRegistry(_settings));
             });
+
+            _container.AssertConfigurationIsValid();
 
             GlobalContainer = _container;
 

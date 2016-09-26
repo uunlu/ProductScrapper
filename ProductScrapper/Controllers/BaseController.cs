@@ -15,12 +15,16 @@ namespace ProductScrapper.Controllers
         [SetterProperty]
         public IRequestDispatcher Dispatcher { get; set; }
 
+        [SetterProperty]
+        public IMediator mediator { get; set; }
+
         protected async Task<TResponse> DispatchAsync<TResponse>(IAsyncRequest<TResponse> request)
         where TResponse : IResponse
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-            return await Dispatcher.DispatchAsync(request);
+            //return await Dispatcher.DispatchAsync(request);
+            return await mediator.SendAsync(request);
         }
     }
 }
