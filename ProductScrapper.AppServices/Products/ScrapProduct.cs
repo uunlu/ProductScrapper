@@ -24,9 +24,13 @@ namespace ProductScrapper.AppServices.Products
         {
             public Task<Response> Handle(Request message)
             {
-                var pManager = new ProductListManager();
                 var url = "http://www.dickssportinggoods.com/family/index.jsp?bc=CatGroup_MensShoes_R1_C1_AthleticSneakers&ppp=144&categoryId=63266056&page=1";
-                pManager.GetProducts(url);
+                var productDetailUrl =
+                "http://www.dickssportinggoods.com/product/index.jsp?productId=68713676&ppp=144&cp=4406646.4413987.4417989&categoryId=63266056";
+                
+                var pManager = new ProductDetailsManager(productDetailUrl);
+                // pManager.GetProducts(url);
+                pManager.GetProductDetails();
                 throw new NotImplementedException();
             }
         }

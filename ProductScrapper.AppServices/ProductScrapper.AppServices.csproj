@@ -77,13 +77,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseHandler.cs" />
     <Compile Include="BaseResponse.cs" />
+    <Compile Include="Decorators\ValidatorHandler.cs" />
     <Compile Include="Dtos\DatePeriodDto.cs" />
     <Compile Include="Dtos\TooltipAttribute.cs" />
     <Compile Include="IBootstrapperSettings.cs" />
     <Compile Include="IRequestDispatcher.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="ISmtpClientSettings.cs" />
+    <Compile Include="MongoFileClient.cs" />
     <Compile Include="Products\ScrapProduct.cs" />
     <Compile Include="Products\ScrapAllProducts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

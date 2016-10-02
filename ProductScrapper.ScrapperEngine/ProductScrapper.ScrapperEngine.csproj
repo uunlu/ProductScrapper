@@ -67,7 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dickssportinggoods\ProductListManager.cs" />
+    <Compile Include="Dickssportinggoods\ProductDetailsManager.cs" />
+    <Compile Include="Dickssportinggoods\ProductListFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

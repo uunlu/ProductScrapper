@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductScrapper.AppServices
 {
-    public interface IBootstrapperSettings : ISmtpClientSettings
+    public interface IBootstrapperSettings// : ISmtpClientSettings
     {
         string Database_Main_ConnectionString { get; }
         ApplicationTypeEnum ApplicationType { get; }

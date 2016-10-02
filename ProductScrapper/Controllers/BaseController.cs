@@ -12,8 +12,8 @@ namespace ProductScrapper.Controllers
 {
     public class BaseController : Controller
     {
-        [SetterProperty]
-        public IRequestDispatcher Dispatcher { get; set; }
+        //[SetterProperty]
+        //public IRequestDispatcher Dispatcher { get; set; }
 
         [SetterProperty]
         public IMediator mediator { get; set; }
@@ -24,7 +24,7 @@ namespace ProductScrapper.Controllers
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
             //return await Dispatcher.DispatchAsync(request);
-            return await mediator.SendAsync(request);
+             return await mediator.SendAsync(request);
         }
     }
 }

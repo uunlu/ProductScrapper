@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProductScrapper.AppServices.Products;
 using ProductScrapper.Framework;
+using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace ProductScrapper.IntegrationTests
         {
             Assert.Equal(6, 6);
         }
+
 
         [Fact]
         public void validate_request_handler_dependencies()

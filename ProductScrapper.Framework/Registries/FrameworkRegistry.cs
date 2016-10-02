@@ -9,6 +9,8 @@ using ProductScrapper.AppServices;
 using static ProductScrapper.AppServices.Products.ScrapAllProducts;
 using ProductScrapper.AppServices.Products;
 using MediatR;
+using FluentValidation;
+using MongoDB.Driver;
 
 namespace ProductScrapper.Framework.Registries
 {
@@ -16,41 +18,50 @@ namespace ProductScrapper.Framework.Registries
     {
         public FrameworkRegistry(IBootstrapperSettings settings)
         {
-            
+
+            //Scan(scanner =>
+            //{
+            //    //scanner.AssemblyContainingType(typeof(FluentValidation.AbstractValidator<>));
+            //    scanner.AssemblyContainingType(typeof(ScrapAllProducts.Request));
+            //    //scanner.AssemblyContainingType(typeof(IRequestHandler<,>));
+            //    scanner.AssemblyContainingType(typeof(IAsyncRequestHandler<,>));
+
+            //    //scanner.AddAllTypesOf(typeof(FluentValidation.IValidator<>));
+            //    //scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
+            //    scanner.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
+
+            //    scanner.WithDefaultConventions();
+            //});
+
+            //For(typeof(IAsyncRequestHandler<,>)).Use(typeof(Handler));
+
             Scan(scanner =>
             {
-                scanner.AssemblyContainingType(typeof(FluentValidation.AbstractValidator<>));
+                scanner.TheCallingAssembly();
                 scanner.AssemblyContainingType(typeof(ScrapAllProducts.Request));
-                scanner.AssemblyContainingType<IMediator>();
                 scanner.AssemblyContainingType(typeof(IRequestHandler<,>));
                 scanner.AssemblyContainingType(typeof(IAsyncRequestHandler<,>));
-                scanner.AssemblyContainingType(typeof(IRequestDispatcher));
+                scanner.AssemblyContainingType(typeof(IValidator<>));
+                scanner.AssemblyContainingType(typeof(IMediator));
 
-                //scanner.AddAllTypesOf(typeof(FluentValidation.IValidator<>));
-                scanner.AddAllTypesOf(typeof(IRequestDispatcher));
-                scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
+                scanner.AddAllTypesOf(typeof(IValidator<>));
                 scanner.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
-
-                scanner.WithDefaultConventions();
+                scanner.AddAllTypesOf(typeof(IAsyncNotificationHandler<>));
+                scanner.AddAllTypesOf(typeof(IMediator));
             });
-
-            // Messaging
-            For<SmtpClient>().Use(() => SmtpClientFactory.CreateSmtpClient(settings));
-            //For<IRequestDispatcher>().Use(ctx => new RequestDispatcher(type => ctx.GetInstance(type)));
-
-
-            //For(typeof(IRequestHandler<,>)).Use(typeof(Handler)); // Register default handler.
 
             For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
-            For<IMediator>().Use<Mediator>();   
+            For<IMediator>().Use<Mediator>();
+            For<MongoFileClient>().Use(ctx => CreateSession(ctx));
 
-            For(typeof(IAsyncRequestHandler<,>)).Use(typeof(Handler)); // Register default handler.
+            var featureHandlerTypes = For(typeof(IAsyncRequestHandler<,>));
 
-            //var featureHandlerTypes = For(typeof(IAsyncRequestHandler<,>));
-            //featureHandlerTypes.DecorateAllWith(typeof(TransactionHandler<,>)); 
-            //featureHandlerTypes.DecorateAllWith(typeof(ValidatorHandler<,>));
+        }
 
+        private MongoFileClient CreateSession(IContext ctx)
+        {
+            return ctx.GetInstance<MongoFileClient>("amazon");
         }
     }
 }
