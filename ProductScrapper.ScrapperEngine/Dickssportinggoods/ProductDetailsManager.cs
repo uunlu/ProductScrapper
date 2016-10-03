@@ -27,7 +27,7 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             product = new Product();
         }
 
-        public void GetProductDetails()
+        public Product GetProductDetails()
         {
             html = Browser.HttpWebRequestGet(productUrl);
             doc = Helper.GetDocument(html);
@@ -41,16 +41,18 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             GetOtherImages();
 
             SaveLineTabDelimited(product);
+
+            return product;
         }
 
-        public void GetTitle()
+        private void GetTitle()
         {
             var title = Helper.GetSingleNodeByClass(doc, "h1", "prod-title")?.InnerText;
 
             product.Title = title;
         }
 
-        public void GetPrice()
+        private void GetPrice()
         {
             var price = Helper.GetSingleNode(doc, "//span[@itemprop='price']")?.InnerText
                 .Replace("&#036;", "$")
@@ -59,7 +61,7 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             product.Price = price;
         }
 
-        public void GetAvailableSizes()
+        private void GetAvailableSizes()
         {
             Regex jsonRegex = new Regex("productJson.*?(?=</script>)", RegexOptions.Singleline);
             var json = jsonRegex.Match(html).Value
@@ -76,14 +78,14 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             }
         }
 
-        public void GetProductInformation()
+        private void GetProductInformation()
         {
             var productInformation = Helper.GetSingleNodeByClass(doc, "div", "prod-short-desc")?.InnerText.Trim();
 
             product.ProductInformation = productInformation;
         }
 
-        public void GetProductFeatures()
+        private void GetProductFeatures()
         {
             var features = Helper.GetCollectionByClass(doc, "div", "prod-long-desc", "ul/li");
 
@@ -97,7 +99,7 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             }
         }
 
-        public void GetMainImage()
+        private void GetMainImage()
         {
             Regex jsonRegex = new Regex("productJson.*?(?=</script>)", RegexOptions.Singleline);
             var json = jsonRegex.Match(html).Value
@@ -121,7 +123,7 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             product.MainImage.EnhancedImageURL = enhancedImageURL;
         }
 
-        public void GetOtherImages()
+        private void GetOtherImages()
         {
             Regex jsonRegex = new Regex("productJson.*?(?=</script>)", RegexOptions.Singleline);
             var json = jsonRegex.Match(html).Value
@@ -154,7 +156,6 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
                 index++;
             }
         }
-
 
     }
 }

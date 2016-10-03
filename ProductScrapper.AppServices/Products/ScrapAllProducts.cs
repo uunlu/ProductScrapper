@@ -21,7 +21,7 @@ namespace ProductScrapper.AppServices.Products
 
         public class Response: BaseResponse
         {
-
+            public int Total { get; set; }
         }
 
         public class Handler : BaseHandler<Request, Response>
@@ -31,14 +31,15 @@ namespace ProductScrapper.AppServices.Products
             public override async Task<Response> Handle(Request request)
             {
                 var p = new ProductListFactory(request.Url);
-                var messages = p.GetProductLinks();
 
-                foreach (var item in messages)
+                var messages = await Task.WhenAll(p.GetProductLinks());
+
+                foreach (var item in p.Messages)
                 {
                     await Session.InsertOne(item);
                 }
 
-                return new Response { };
+                return new Response { Total = p.Messages.Count };
             }
 
             //public async Task<Response> Handle(Request message)

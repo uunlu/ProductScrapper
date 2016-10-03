@@ -53,15 +53,15 @@ namespace ProductScrapper.Framework.Registries
             For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
             For<IMediator>().Use<Mediator>();
-            For<MongoFileClient>().Use(ctx => CreateSession(ctx));
+       //     For<MongoFileClient>().Use(ctx => CreateSession(ctx));
 
             var featureHandlerTypes = For(typeof(IAsyncRequestHandler<,>));
 
         }
 
-        private MongoFileClient CreateSession(IContext ctx)
-        {
-            return ctx.GetInstance<MongoFileClient>("amazon");
-        }
+        //private MongoFileClient CreateSession(IContext ctx)
+        //{
+        //    return ctx.GetInstance<MongoFileClient>();
+        //}
     }
 }

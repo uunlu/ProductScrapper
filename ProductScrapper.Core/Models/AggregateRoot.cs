@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace ProductScrapper.Core.Models
                 DateCreated = DateTime.UtcNow;
 
             DateModified = DateTime.UtcNow;
+            IsActive = true;
+            Id = Guid.NewGuid().ToString();
         }
-
-        public ObjectId Id { get; set; }
+        [BsonId]
+        public string Id { get; set; }
         public bool IsActive { get; set; }
-        public DateTime DateCreated { get; private set; }
+        public DateTime DateCreated { get; private set; } 
         public DateTime DateModified { get; private set; }
     }
 }

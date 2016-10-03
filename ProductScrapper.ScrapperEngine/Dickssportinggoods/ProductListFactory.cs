@@ -12,7 +12,7 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
     public class ProductListFactory
     {
         private string productLinkUrl { get; set; }
-        private List<Message> Messages { get; set; } = new List<Message>();
+        public List<Message> Messages { get; set; } = new List<Message>();
         private string html { get; set; }
         private HtmlAgilityPack.HtmlDocument doc { get; set; }
 
@@ -24,11 +24,13 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
         public ProductListFactory(string url)
         {
             productLinkUrl = ChangeUrl(url);
+            html = Browser.HttpWebRequestGet(url);
+            doc = Helper.GetDocument(html);
         }
 
         private string ChangeUrl(string productLinkUrl)
         {
-            Regex itemPerPageRegex = new Regex("ppp\\d{2,3}");
+            Regex itemPerPageRegex = new Regex("ppp=\\d{2,3}");
             if (productLinkUrl.Contains("&ppp"))
             {
                 var pp = itemPerPageRegex.Match(productLinkUrl).Value;
@@ -41,18 +43,20 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
             return productLinkUrl;
         }
 
-        public List<Message> GetProductLinks()
+        public async Task<List<Message>> GetProductLinks()
         {
+
             int total = ExtractTotalNumberOfItems();
             int numberOfPages = ExtractTotalNumberOfPages();
-
             string page = "&page=";
 
             for (int i = 1; i <= numberOfPages; i++)
             {
                 var url = productLinkUrl + page + i;
-                var html = Browser.HttpWebRequestGet(url);
+                var html = await Browser.HttpWebRequestGetAsync(url);
+                doc = Helper.GetDocument(html);
                 GetProductUrls();
+                //break;
             }
 
             return Messages;
@@ -70,7 +74,8 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
                 var message = new Message
                 {
                     UrlToScrap = productUrl,
-                    Site = Core.Common.Website.Websites.Dickssportinggoods
+                    Site = Core.Common.Website.Websites.Dickssportinggoods,
+                     ProductType = "Shoe"
                 };
 
                 Messages.Add(message);
@@ -93,7 +98,9 @@ namespace ProductScrapper.ScrapperEngine.Dickssportinggoods
         private int ExtractTotalNumberOfPages()
         {
             var aTags = Helper.GetCollectionByClass(doc, "span", "pages", "a");
-            var pageCount = aTags.ElementAt(3).InnerText;
+            if (aTags.Count <= 2)
+                return 1;
+            var pageCount = aTags.ElementAt(aTags.Count-2).InnerText;
 
             int total = 0;
 

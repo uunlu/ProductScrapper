@@ -10,9 +10,9 @@ namespace ProductScrapper.AppServices
     public class MongoFileClient
     {
         public IMongoDatabase _db { get; set; }
-        public MongoFileClient(string database)
+        public MongoFileClient()
         {
-            _db = GetDatabase(database);
+            _db = GetDatabase("Dickssportinggoods");
         }
         public IMongoDatabase GetDatabase(string dbName)
         {

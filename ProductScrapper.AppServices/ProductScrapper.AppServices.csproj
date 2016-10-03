@@ -57,7 +57,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\ScrapEngine\ScrapEngine\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ScrapEngine">
+    <Reference Include="ScrapEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ScrapEngine\ScrapEngine\obj\Debug\ScrapEngine.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.3.0.449, Culture=neutral, processorArchitecture=MSIL">
