@@ -16,6 +16,7 @@ namespace ProductScrapper.Core.Models
                 DateCreated = DateTime.UtcNow;
 
             DateModified = DateTime.UtcNow;
+            DateCreated = DateTime.UtcNow;
             IsActive = true;
             Id = Guid.NewGuid().ToString();
         }
@@ -23,6 +24,6 @@ namespace ProductScrapper.Core.Models
         public string Id { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateCreated { get; private set; } 
-        public DateTime DateModified { get; private set; }
+        public DateTime DateModified { get;  set; }
     }
 }
